@@ -11,13 +11,34 @@ export default class Pawn extends Piece {
         var location = board.findPiece(this)
         if (this.player === Player.WHITE)
         {
-            return Square.at(location.row +1,location.col)
+            if ((location.row) == 1)
+            {
+                var moves = [Square.at(location.row +1,location.col),Square.at(location.row +2,location.col)]
+                return moves;
+            }
+            else
+            {
+                var moves = [Square.at(location.row +1,location.col)]
+                return moves;              
+            }
         }
         else
         {
-            return Square.at(location.row -1,location.col)
+            if ((location.row) == 6)
+            {
+                var moves = [Square.at(location.row -1,location.col),Square.at(location.row -2,location.col)]
+                return moves;
+            }
+            else
+            {
+                var moves = [Square.at(location.row -1,location.col)]
+                return moves;    
+            }
         }
         
 //        return [Square.at(1,0)];
     }
+
+ 
+
 }
