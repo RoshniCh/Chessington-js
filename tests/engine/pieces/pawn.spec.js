@@ -44,6 +44,17 @@ describe('Pawn', () => {
             moves.should.deep.include.members([Square.at(2, 7)]);
         });
 
+        it('can move diagonally one step forward if there is an opposite piece in the square', () => {
+            const pawn = new Pawn(Player.WHITE);
+            const bishop = new Bishop(Player.BLACK);
+            board.setPiece(Square.at(1, 5), pawn);
+            board.setPiece(Square.at(2, 4), bishop);
+            const moves = pawn.getAvailableMoves(board);
+
+            moves.should.have.length(3);
+            moves.should.deep.include.members([Square.at(2, 4)]);
+        });
+
     });
 
     describe('black pawns', () => {
@@ -70,6 +81,17 @@ describe('Pawn', () => {
 
             moves.should.have.length(2);
             moves.should.deep.include.members([Square.at(4, 7), Square.at(5, 7)]);
+        });
+
+        it('can move diagonally one step forward if there is an opposite piece in the square', () => {
+            const pawn = new Pawn(Player.BLACK);
+            const bishop = new Bishop(Player.WHITE);
+            board.setPiece(Square.at(6, 5), pawn);
+            board.setPiece(Square.at(5, 4), bishop);
+            const moves = pawn.getAvailableMoves(board);
+
+            moves.should.have.length(3);
+            moves.should.deep.include.members([Square.at(5, 4)]);
         });
 
     });
