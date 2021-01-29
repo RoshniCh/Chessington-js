@@ -1,5 +1,6 @@
 import 'chai/register-should';
 import Pawn from '../../../src/engine/pieces/pawn';
+import Bishop from '../../../src/engine/pieces/bishop';
 import Board from '../../../src/engine/board';
 import Player from '../../../src/engine/player';
 import Square from '../../../src/engine/square';
@@ -30,6 +31,17 @@ describe('Pawn', () => {
 
             moves.should.have.length(2);
             moves.should.deep.include.members([Square.at(2, 7), Square.at(3, 7)]);
+        });
+
+        it('can move only one step if there is a piece on the second step', () => {
+            const pawn = new Pawn(Player.WHITE);
+            const bishop = new Bishop(Player.WHITE);
+            board.setPiece(Square.at(1, 7), pawn);
+            board.setPiece(Square.at(3, 7), bishop);
+            const moves = pawn.getAvailableMoves(board);
+
+            moves.should.have.length(1);
+            moves.should.deep.include.members([Square.at(2, 7)]);
         });
 
     });
